@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anycubic-cloud-frontend"
+version = "0.1.1"
+description = "Frontend panel for the Home Assistant Anycubic Cloud integration"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Nino Bondonno" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Home Automation",
+]
+
+[project.urls]
+Homepage = "https://github.com/Nino6689/anycubic-cloud-frontend"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+anycubic_cloud_frontend = ["*.js", "*.js.map"]
