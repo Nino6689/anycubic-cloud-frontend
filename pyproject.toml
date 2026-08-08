@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anycubic-cloud-frontend"
-version = "0.1.1"
+version = "0.1.2"
 description = "Frontend panel for the Home Assistant Anycubic Cloud integration"
 readme = "README.md"
 requires-python = ">=3.12"

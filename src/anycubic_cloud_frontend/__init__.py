@@ -8,7 +8,7 @@ knx-frontend takes for KNX.
 
 from typing import Final
 
-from .constants import FILE_HASH
+from .constants import CARD_HASH, FILE_HASH
 
 
 def locate_dir() -> str:
@@ -18,6 +18,16 @@ def locate_dir() -> str:
 
 # Filename of the entrypoint to import the panel.
 entrypoint_js: Final = f"entrypoint.{FILE_HASH}.js"
+
+# Filename of the Lovelace card bundle. Unlike the panel entrypoint this keeps a
+# stable name, so anyone who added it as a dashboard resource by hand keeps
+# working across updates; `card_js_url` carries the hash instead.
+card_js: Final = "anycubic-card.js"
+
+# Query the card should be requested with. Home Assistant serves this directory
+# without a Cache-Control header, so without a changing URL a browser holds on
+# to the copy it fetched first and users keep seeing the previous card.
+card_js_url: Final = f"{card_js}?v={CARD_HASH}"
 
 # The web component name that loads the panel.
 webcomponent_name: Final = "anycubic-cloud-panel"
