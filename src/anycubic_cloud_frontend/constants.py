@@ -4,10 +4,10 @@ from typing import Final
 
 # Content hash of the built panel bundle, used to cache-bust the served
 # entrypoint (it is part of the entrypoint's filename).
-FILE_HASH: Final = "d1a1d3e9"
+FILE_HASH: Final = "c4522782"
 
 # Content hash of the built card bundle. The card keeps a stable filename, so
 # this rides on the URL instead. It is tracked separately from FILE_HASH
 # because a change confined to the card leaves the panel bundle untouched, and
 # reusing the panel's hash would leave browsers on the previous card.
-CARD_HASH: Final = "b0e98dd9"
+CARD_HASH: Final = "52d4b6fb"
