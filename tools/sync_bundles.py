@@ -2,9 +2,9 @@
 """Copy the built frontend bundles into this package and stamp their hashes.
 
 Run from the repo root after `npm run build && npm run build_card` in
-hass-anycubic/custom_components/anycubic_cloud/frontend_panel:
+hass-anycubic/frontend_panel:
 
-    python3 tools/sync_bundles.py ../hass-anycubic/custom_components/anycubic_cloud/frontend_panel/dist
+    python3 tools/sync_bundles.py ../hass-anycubic/frontend_panel/dist
 
 Doing this by hand means keeping two hashes, two filenames and a constants file
 in agreement, and a mismatch either 404s the panel or leaves every browser on
