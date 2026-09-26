@@ -11,12 +11,20 @@ name: Build
 on:
   push:
     branches: [main]
+    # A tag builds, checks and then publishes: every version on PyPI comes from
+    # this pipeline and a tagged commit, as Home Assistant's
+    # dependency-transparency rule requires. Trusted publishing, so no token.
+    tags: ["v*"]
   pull_request:
     branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ startsWith(github.ref, 'refs/tags/') && 'pypi' || '' }}
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -67,3 +75,16 @@ jobs:
               print(f"::error::{p}")
           sys.exit(1 if problems else 0)
           PY
+
+      - name: The tag must name the version being built
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          version=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match pyproject version $version"
+            exit 1
+          fi
+
+      - name: Publish
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: pypa/gh-action-pypi-publish@release/v1
